@@ -45,14 +45,16 @@ def dtw(s1, s2, dist):
         
         path.append(min_prev)
     
-    cost = cost_matrix[-1, -1]/(len_s1 + len_s2)
+    # cost = cost_matrix[-1, -1]/(len_s1 + len_s2)
+    cost = sum(path)/(len(path)-1)
 
     return cost_matrix[1:, 1:], path, cost
 
 # Testing
-# series1 = pd.Series([3, 4, 5, 3, 3])
-# series2 = pd.Series([1,2,2,1,0])
-# series3 = pd.Series([1,2,2,1,0,1,1,2,1,2])
-# series4 = pd.Series([3,4,5,3,3,2,3,4,2,3])
-# matrix,path,cost = dtw(series3, series4, euclidian_dist)
-# print(cost)
+# series1 = pd.Series([1,5,3,2,9])
+# series2 = pd.Series([1,7,2,3,2,2,8])
+# # series3 = pd.Series([1,2,2,1,0,1,1,2,1,2])
+# # series4 = pd.Series([3,4,5,3,3,2,3,4,2,3])
+# matrix,path,cost = dtw(series1, series2, euclidian_dist)
+# print(matrix)
+# print(path)
