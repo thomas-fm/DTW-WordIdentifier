@@ -13,7 +13,7 @@ def euclidian_dist(x, y):
 '''
 Simple DTW Implementation
 '''
-def dtw(s1, s2, dist=euclidian_dist):
+def dtw(s1, s2, dist):
     len_s1, len_s2 = len(s1), len(s2)
     cost_matrix = np.zeros((len_s1+1, len_s2+1))
 
@@ -35,7 +35,6 @@ def dtw(s1, s2, dist=euclidian_dist):
     idx_i, idx_j = len_s1, len_s2
     path = []   
     path.append(cost_matrix[idx_i, idx_j])
-    cost = 0
 
     while (idx_i != 0 and idx_j != 0):
         i, j = idx_i, idx_j
@@ -49,18 +48,12 @@ def dtw(s1, s2, dist=euclidian_dist):
             idx_i, idx_j = i-1, j-1
         
         path.append(min_prev)
-        cost+=min_prev
+#         cost+=min_prev
+    
+    cost = cost_matrix[-1, -1]/(len_s1 + len_s2)
+#     print(cost)
+    return cost_matrix[1:, 1:], path, cost
 
-    return cost_matrix, path, cost
-
-matrix,path,cost = dtw(series3, series4)
-print(cost)
-# dtw_matrix, path = dtw(series4,series3)
-
-# print(dtw_matrix)
-# print(path)
-# c = 10
-# C = 11
-# print(c)
-# print(C)
+# matrix,path,cost = dtw(series3, series4, euclidian_dist)
+# print(cost)
 
